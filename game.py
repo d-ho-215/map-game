@@ -1,22 +1,30 @@
 import os
 import keyboard
 from time import sleep
-from rich.panel import Panel
-from rich import print
+# from rich.panel import Panel
+# from rich import print
+
+from maps import load_map, construct_tilemap
+from tiles import Tile
 
 os.chdir(r'C:\Users\howar\Documents\PYTHON\MAP MOVER GAME')
 
-with open('MAP1.txt') as file:
-    map_raw = file.read()
+# with open('MAP1.txt') as file:
+    # map_raw = file.read()
     
 
-map = []
+# map = []
 
-for line in map_raw.split('\n'):
-    row = []
-    for char in line:
-        row.append(char)
-    map.append(row)
+# for line in map_raw.split('\n'):
+    # row = []
+    # for char in line:
+        # row.append(char)
+    # map.append(row)
+
+raw_map = load_map('MAP1.txt')
+map = construct_tilemap(raw_map)
+
+
 
 
 VIEW_SIZE = (8,20) # 6 ROWS, 10 COLUMNS
@@ -35,12 +43,17 @@ def construct_mini_map(start_x, start_y):
     return map_section
 
 def draw_map_section(mini_map):
-    map_str = ""
-    for row in mini_map:
-        row_str = "".join(row) + "\n"
-        map_str = map_str + row_str
+    # map_str = ""
+    # for row in mini_map:
+        # row_str = "".join([str(tile) for tile in row]) + "\n"
+        # map_str = map_str + row_str
     
-    print(Panel.fit(map_str))
+    # print(map_str)
+    for row in mini_map:
+        for tile in row:
+            print(tile, end='')
+        print('')
+    
     print(current_pos)
 
 # def get_move():
